@@ -13,7 +13,13 @@ module.exports = {
 
   
   theme: {
-    extend: {},
+    extend:  {
+      fontFamily: {
+        pacifico: ['Pacifico', 'cursive'],
+        dancing: ['Dancing Script', 'cursive'],
+        amatic: ['Amatic SC', 'cursive'],
+      },
+    },
   },
   plugins: [
     require('flowbite/plugin'),

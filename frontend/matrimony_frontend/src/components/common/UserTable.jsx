@@ -4,6 +4,7 @@ import { Button, Modal, FloatingLabel, Datepicker as FlowBiteDate } from 'flowbi
 
 import { MdEdit, MdDelete, MdVerified } from "react-icons/md";
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import UserInfo from './modals/UserInfoModal';
 
 
 const UserTable = () => {
@@ -181,6 +182,10 @@ const UserTable = () => {
                     </div>
                   </Modal.Body>
                 </Modal>
+
+
+                {/* UserInfo Modal */}
+                <UserInfo />
 
             
 

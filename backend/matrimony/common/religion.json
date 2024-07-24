@@ -1,0 +1,42 @@
+{
+    "Hinduism": {
+        "Brahmin": ["Iyer", "Iyengar", "Gowda Saraswat Brahmin", "Namboothiri", "Hoysala Karnataka", "Madhwa", "Deshastha", "Chitpavan", "Saryupareen", "Maithil Brahmin", "Gaur Brahmin", "Bhumihar"],
+        "Kshatriya": ["Rajput", "Maratha", "Reddy", "Kapu", "Khandayat", "Thakur", "Nair"],
+        "Vaishya": ["Agarwal", "Gupta", "Bania", "Oswal", "Maheshwari", "Modh", "Khandelwal", "Vaishnav"],
+        "Shudra": ["Yadav", "Kurmi", "Jat", "Ezhava", "Lingayat", "Gounder", "Kamma", "Ravidasia", "Koli"]
+    },
+    "Islam": {
+        "Sunni": ["Syed", "Sheikh", "Pathan", "Qureshi", "Ansari", "Siddiqui"],
+        "Shia": ["Syed", "Bohra", "Khoja", "Ismaili", "Ithna Ashari"]
+    },
+    "Christianity": {
+        "Catholic": ["Roman Catholic", "Syro-Malabar Catholic", "Syro-Malankara Catholic", "Latin Catholic", "Goan Catholic", "Mangalorean Catholic", "Syrian Catholic"],
+        "Protestant": ["Baptist", "Methodist", "Lutheran", "Anglican", "Pentecostal", "Presbyterian"],
+        "Orthodox": ["Malankara Orthodox", "Syrian Orthodox", "Armenian Orthodox", "Greek Orthodox", "Russian Orthodox"]
+    },
+    "Sikhism": {
+        "Jat": ["Jat Sikh", "Ramgarhia", "Jat Mazhabi"],
+        "Khatri": ["Khatri Sikh", "Arora Sikh", "Bhatia Sikh"],
+        "Mazhabis": ["Mazhabis Sikh", "Ravidasia Sikh"]
+    },
+    "Buddhism": {
+        "Theravada": ["Theravada Buddhist"],
+        "Mahayana": ["Mahayana Buddhist"],
+        "Vajrayana": ["Tibetan Buddhist"]
+    },
+    "Jainism": {
+        "Digambara": ["Digambara Jain", "Sthanakvasi Jain"],
+        "Svetambara": ["Svetambara Jain", "Terapanthi Jain"]
+    },
+    "Zoroastrianism": {
+        "Parsi": ["Parsi Zoroastrian"],
+        "Irani": ["Irani Zoroastrian"]
+    },
+    "Judaism": {
+        "Ashkenazi": ["Ashkenazi Jew"],
+        "Sephardi": ["Sephardi Jew"],
+        "Mizrahi": ["Mizrahi Jew"],
+        "Cochin": ["Cochin Jew"],
+        "Bene Israel": ["Bene Israel Jew"]
+    }
+}

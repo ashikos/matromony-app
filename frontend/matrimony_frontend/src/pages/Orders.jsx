@@ -31,6 +31,7 @@ const Orders = () => {
         size={size} 
         isOpen={isOpen} 
         onClose={onClose} 
+        backdrop={'blur'}
       >
         <ModalContent>
           {(onClose) => (

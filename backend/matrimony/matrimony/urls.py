@@ -17,8 +17,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('djadmin/', admin.site.urls),
-    path("pages/", include("pages.urls",  namespace="pages"))
+    path("payments/", include("payments.urls",  namespace="payments")),
+    path("accounts/", include("accounts.urls",  namespace="accounts")),
+    path("wedlock/", include("wedlock.urls",  namespace="wedlock")),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

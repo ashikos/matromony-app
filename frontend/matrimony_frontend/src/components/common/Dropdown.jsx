@@ -4,6 +4,10 @@ import {Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button} from "@ne
 const Dropdowns = (props) => {
   const [selectedKeys, setSelectedKeys] = React.useState(new Set([null]));
 
+  const dict={
+    "as":123
+  }
+
   const selectedValue = React.useMemo(
     () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
     [selectedKeys]
@@ -14,7 +18,7 @@ const Dropdowns = (props) => {
       <DropdownTrigger>
         <Button 
           variant="bordered" 
-          className="capitalize  w-[10vw] bg-white h-14 shadow-md"
+          className= {props.css}
           
         >
           {selectedValue ? selectedValue : props.dict.default}
@@ -25,14 +29,14 @@ const Dropdowns = (props) => {
         variant="flat"
         closeOnSelect={false}
         disallowEmptySelection={false}
-        selectionMode="multiple"
+        selectionMode={props.selection}
         selectedKeys={selectedKeys}
         onSelectionChange={setSelectedKeys}
         className="shadow-2xl"
       >
         {
             Object.entries(props.dict).map(([key, value])=>(
-                <DropdownItem key={key}>{value}</DropdownItem>
+                <DropdownItem key={value}>{value}</DropdownItem>
             ))
         }
         
@@ -43,3 +47,5 @@ const Dropdowns = (props) => {
 
 
 export default Dropdowns
+
+
