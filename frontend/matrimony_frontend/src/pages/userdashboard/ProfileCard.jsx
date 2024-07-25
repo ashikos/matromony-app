@@ -5,6 +5,8 @@ import UserInfoModal from '../../components/common/modals/UserInfoModal';
 import UserInfo from './UserInfo';
 import IntrestButton from '../../components/widgets/IntrestButton';
 import AcceptDiv from '../../components/widgets/AcceptDiv';
+import gold from '../../assets/plus/diamond.png'
+import { TierImgs } from '../../libs/utils/Choices';
 
 
 const ProfileCard = ({ profile }) => {
@@ -44,7 +46,10 @@ useEffect(() => {
       </div>
       <div className="p-5 px-8 w-full">
         <div className="text-pink-600 font-serif flex justify-between">
-          <h1 className='text-5xl'>{profile.first_name} {profile.last_name} {profile.id} </h1>
+          <div className="flex ">
+          <h1 className='text-5xl'>{profile.first_name} {profile.last_name} {profile.id} </h1> {(profile.tier === 101)  ?  '': <img className='w-12 border-none' src={TierImgs[profile.tier]} alt="" />} 
+          </div>
+          
           <button onClick={HandleViewProfile}>View profile</button>
 
           <UserInfoModal show={showModal} onClose={HandleViewProfile}>

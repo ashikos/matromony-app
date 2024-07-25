@@ -3,12 +3,14 @@ import { Link, } from 'react-router-dom'
 import axios from '../../axios'
 import { useNavigate } from 'react-router';
 import { UserTypes } from '../../libs/utils/Dropdown';
+import Alertbox from '../../components/widgets/Alertbox';
 
 
 const Login = () => {
 
   const [creds, SetCreds] = useState(
     {'username':'', 'password':''})
+    const [errorMessage, setError] = useState({title:null, color:"success", message:null});
 
     const navigate = useNavigate();
 
@@ -89,6 +91,7 @@ const Login = () => {
       </div>
     </form>
   </div>
+  <Alertbox errorMessage={errorMessage}/>
 </div>
   )
 }

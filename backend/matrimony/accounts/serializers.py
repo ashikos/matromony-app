@@ -64,7 +64,7 @@ class BaseUserSerializer(serializers.ModelSerializer):
         fields = ['id', 'first_name', 'last_name', 'age', 'gender', 'languages',
                   'smoking', 'drinking', 'hobbies', 'phone', 'address', 'email',
                   'district', 'pincode', 'is_employ', 'is_short_term', 'image',
-                  'client_id', 'dob', 'interest', 'likes', 'requests']
+                  'client_id', 'dob', 'interest', 'likes', 'requests', 'tier']
 
     def get_requests(self, instance):
         """Data of users which owner has received requests"""

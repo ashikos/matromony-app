@@ -8,7 +8,7 @@ import dash_bg from '../../assets/bgs/dash_bg.jpeg'
 const DashboardLayout = () => {
   return (
 
-    <div className='flex justify-evenly w-full h-screen bg-pink-100' >
+    <div className="flex justify-evenly w-full h-screen bg-[url('https://i.pinimg.com/originals/ec/b8/1b/ecb81bce76f838ff41df121347b4444e.jpg')] bg-cover bg-center" >
     <div className="w-[18rem] bg-gray-200">
       <Sidebar />
     </div>

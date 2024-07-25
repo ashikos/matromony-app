@@ -2,6 +2,9 @@ import {useEffect, useState } from "react";
 import React from "react";
 import axios from '../../axios'
 import { Link, } from 'react-router-dom'
+import sidebar_bg from '../../assets/bgs/sidebar_bg.jpg'
+import { TierImgs } from "../../libs/utils/Choices";
+
 
 
 const UserSidebar = () => {
@@ -27,7 +30,8 @@ const UserSidebar = () => {
 
 
     return (
-        <div className="h-screen bg-pink-200  text-gray-700 w-full flex flex-col">
+        <div className="h-screen bg-pink-200  text-gray-700 w-full flex flex-col" style={{
+          backgroundImage: `url(${sidebar_bg})`}}>
           <div className='py-3 px-5 flex-grow'>
             <div className="flex justify-between text-red-500">
                 <h1 className='text-[18px]'>profile</h1>
@@ -36,7 +40,9 @@ const UserSidebar = () => {
             </div>
             <div className="w-full text-pink-600 py-8 text-center space-y-1 ">
                 <img className='w-52 h-52 rounded-full object-cover border-3 border-pink-600 mx-auto mb-4' src={userData.image} alt="" />
-                <h1 className='font-semibold text-2xl '> {userData.first_name} {userData.last_name} </h1>
+                <div className="flex justify-center items-center">
+                  <h1 className='font-semibold text-2xl '> {userData.first_name} {userData.last_name} </h1>{(userData.tier === 101)  ?  '': <img className='w-10 border-none' src={TierImgs[userData.tier]} alt="" />} 
+                </div>
                 <h2 className='font-semibold text-lg'>Age: {userData.age}</h2>
                 <h2 className='font-semibold text-lg'>id: {userData.id}</h2>
                 <h2 className='font-semibold text-lg'>Client id: {userData.client_id}</h2>

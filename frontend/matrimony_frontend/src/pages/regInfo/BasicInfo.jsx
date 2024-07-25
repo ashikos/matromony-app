@@ -24,8 +24,6 @@ const BasicInfo = () => {
 
   const fetchData = async () => {   
     // api to call entries of bavas  
-    
-    
     try {
         const response = await axios.get(
           `accounts/users/${userId}/`);
@@ -46,17 +44,12 @@ const BasicInfo = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(data);
-      console.log(2222, data);
 
       let userId = localStorage.getItem("userId")
       setLoading(true)
       axios.patch(`accounts/users/${userId}/`, data)
         .then(response => {
-          console.log('Post request successful:', response.data);
-          console.log(typeof data.is_employ);
           if (data.is_employ==='true') {
-            console.log('employ logged', data.is_employ);
             navigate('/user/employ/');
         } else {
             console.log('jobseeker logged');

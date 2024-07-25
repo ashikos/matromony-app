@@ -1,9 +1,13 @@
 import React from 'react'
 import {Link, useLocation } from 'react-router-dom'
+import sidebar_bg from '../../assets/bgs/sidebar_bg.jpg'
+
+
 
 const Sidebar = () => {
     return (
-        <div className="h-screen bg-pink-200  text-pink-700 w-full flex flex-col border-r border-pink-200">
+        <div className="h-screen  text-pink-700 w-full flex flex-col border-r border-pink-200"  style={{
+          backgroundImage: `url(${sidebar_bg})`}}>
           <div className="py-5 text-center  font-extrabold text-4xl border-b border-pink-200">
             M4 Matrimony
           </div>

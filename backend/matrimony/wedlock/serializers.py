@@ -112,7 +112,7 @@ class LikeSerializer(serializers.ModelSerializer):
 
 
 class InterestSerializer(serializers.ModelSerializer):
-    requested = serializers.IntegerField(required=False, allow_null=True)
+    # requested = serializers.IntegerField(required=False, allow_null=True)
     class Meta:
         """Meta info"""
         model = UserInterest
