@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
 import axios from '../../axios'; 
@@ -14,10 +14,33 @@ const Success = () => {
     const queryParams = new URLSearchParams(location.search);
     const success = queryParams.get('success') === 'true';
     const tier = queryParams.get('tier');
+    const session_id = queryParams.get('session_id');
+
+    const [error, setError] = useState(null);
 
     let payData = success ? paymentDict.success : paymentDict.failed
 
 
+    const CreateTier = async ()=> {
+        let data={
+            user: userId,
+            tier: tier,
+            is_active: true,
+            session_id: session_id
+
+        }
+        try{
+            const response = await axios.post('payments/transaction/', data);
+            console.log('transaction added succesfully' );
+            console.log(response.data);
+        } catch (error){
+            console.log('Transaction failed server' );
+            console.log(error.message);
+        }
+
+    }
+    
+    
     const handlePremieum = (tier)=>{
         const data = {'tier': tier}
         axios.patch(`accounts/users/${userId}/`, data)
@@ -29,8 +52,9 @@ const Success = () => {
         }).finally(
         );
     }
-
+ 
     handlePremieum(success ? tier : 101)
+    CreateTier(success ? tier : 101)
 
 
   return (

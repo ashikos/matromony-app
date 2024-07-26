@@ -99,13 +99,7 @@ function App() {
 
                 <Route path='/payment' element={<Success/>}> 
                   <Route index element={<UserList/>} />
-                  <Route path='' element={<UserList/>} />
-                  <Route path='saved' element={<Saved/>} />
-                  <Route path='friends' element={<Friends/>} />
-                  <Route path='requests' element={<Requests/>} />
-                  <Route path='chats' element={<Recomandations/>} />
-                  <Route path='plus' element={<Upgrade/>} />
-                  <Route path='payment' element={<Upgrade/>} />    
+                  <Route path='' element={<UserList/>} /> 
                 </Route>
                 
               </Routes>

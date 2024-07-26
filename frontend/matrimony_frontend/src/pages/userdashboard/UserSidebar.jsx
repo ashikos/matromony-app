@@ -51,9 +51,11 @@ const UserSidebar = () => {
           
           
           <div className="p-4 border-t border-pink-700">
-          <button className="w-full bg-pink-500 hover:bg-pink-400 text-white font-bold py-2 px-4 rounded">
+          <Link to={'/'}>
+            <button className="w-full bg-pink-500 hover:bg-pink-400 text-white font-bold py-2 px-4 rounded">
               Logout
             </button>
+          </Link>
           </div>
           
         </div>
