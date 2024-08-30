@@ -52,6 +52,7 @@ class ProjectUserManager(BaseUserManager):
 
 class ProjectUser(AbstractUser):
     """Model to store extra details of user"""
+
     dob = models.DateField(null=True, blank=True)
     place_of_birth = models.CharField(
         max_length=100, null=True, blank=True, default='')
@@ -88,6 +89,9 @@ class ProjectUser(AbstractUser):
     is_short_term = models.BooleanField(null=True, blank=True)
 
     objects = ProjectUserManager()
+
+    class Meta:
+        ordering = ['-id']
 
     def __str__(self):
         return self.first_name
@@ -140,6 +144,3 @@ class ProfessionalInfo(models.Model):
 
     def __str__(self):
         return self.user.first_name
-#
-#
-#

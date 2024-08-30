@@ -9,7 +9,6 @@ from payments import serializers as pay_serializers
 from payments import models as pay_models
 
 
-
 # Create your views here.
 
 class CreateCheckoutSessionView(APIView):
@@ -18,7 +17,8 @@ class CreateCheckoutSessionView(APIView):
         price = request.query_params.get('price', None)
         product_id = request.query_params.get('product_id', None)
 
-        tier = TierTypes.GOLD.value if int(price) == 199 else TierTypes.DIAMOND.value
+        tier = TierTypes.GOLD.value if int(
+            price) == 199 else TierTypes.DIAMOND.value
 
         try:
             stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -32,7 +32,7 @@ class CreateCheckoutSessionView(APIView):
                 },
             )
             checkout_session = stripe.checkout.Session.create(
-                payment_method_types=['bancontact'],
+                payment_method_types=['card'],
                 line_items=[
                     {
                         'price': price.id,
@@ -55,26 +55,3 @@ class TransactionView(viewsets.ModelViewSet):
 
     queryset = pay_models.Transaction.objects.all()
     serializer_class = pay_serializers.PaymentSerializer
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

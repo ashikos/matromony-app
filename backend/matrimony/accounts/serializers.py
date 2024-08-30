@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework import serializers
 from rest_framework import exceptions
 
@@ -5,6 +7,8 @@ from accounts.models import *
 from rest_framework.exceptions import APIException
 from django.db import transaction
 from accounts import utilites
+from payments.models import Transaction
+from accounts.constants import TierTypes
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -35,6 +39,32 @@ class UserSerializer(serializers.ModelSerializer):
             raise exceptions.NotFound("client not found")
 
         return client_id
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        transactions = Transaction.objects.filter(
+            user=instance, is_active=True)
+        queryset = transactions
+        today = datetime.datetime.today()
+
+        for trans in transactions:
+            interval = (today.date() - trans.created_on.date()).days
+            if interval >= 30:
+                queryset = queryset.exclude(id=trans.id)
+
+        if len(queryset) == 0:
+            representation['tier'] = TierTypes.FREE
+            instance.tier = TierTypes.FREE
+            instance.save()
+            return representation
+
+        latest = queryset.last()
+        representation['tier'] = latest.tier
+        instance.tier = latest.tier
+        instance.save()
+
+        return representation
 
     @transaction.atomic()
     def create(self, validated_data):
@@ -147,6 +177,32 @@ class BaseUserSerializer(serializers.ModelSerializer):
             raise exceptions.NotFound("client not found")
 
         return client_id
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+
+        transactions = Transaction.objects.filter(
+            user=instance, is_active=True)
+        queryset = transactions
+        today = datetime.datetime.today()
+
+        for trans in transactions:
+            interval = (today.date() - trans.created_on.date()).days
+            if interval >= 30:
+                queryset = queryset.exclude(id=trans.id)
+
+        if len(queryset) == 0:
+            representation['tier'] = TierTypes.FREE
+            instance.tier = TierTypes.FREE
+            instance.save()
+            return representation
+
+        latest = queryset.last()
+        representation['tier'] = latest.tier
+        instance.tier = latest.tier
+        instance.save()
+
+        return representation
 
 
 class EducationSerializer(serializers.ModelSerializer):
