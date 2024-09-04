@@ -193,3 +193,6 @@ AUTH_USER_MODEL = "accounts.ProjectUser"
 # Stripe setup
 STRIPE_SECRET_KEY = 'sk_test_51PfaCv2NKP0gFECGwvGMRuogrDheRfKmlwDLs68SbWc8rkbjxwFiD8PrlukDX91LbWWQ9elAEMj7OcqvisQDLIul00tlomlOkA'
 
+SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
+
