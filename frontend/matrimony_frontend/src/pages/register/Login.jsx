@@ -10,9 +10,15 @@ const Login = () => {
 
   const [creds, SetCreds] = useState(
     {'username':'', 'password':''})
-    const [errorMessage, setError] = useState({title:null, color:"success", message:null});
+    const [errorMessage, setError] = useState({title:"hdhhhdshfdshjh", color:"success", message:null});
+    const [loading, setLoading] = useState(false)
 
     const navigate = useNavigate();
+
+    async function handleAlertBox(){
+      await new Promise(resolve => setTimeout(resolve, 3000)); 
+      setError(prestat=>({...prestat, message:null, title:null}))
+    }
 
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -22,8 +28,7 @@ const Login = () => {
         headers: {
             
         }
-    })
-        .then(response => {
+    }).then(response => {
           console.log('Post request successful:', response.data);
           console.log(response.data.id);
           const user_id = response.data.id
@@ -39,16 +44,21 @@ const Login = () => {
           localStorage.setItem("ClientId", response.data.advanced_info.client)
           localStorage.setItem("preferenceId", response.data.advanced_info.preference)
           localStorage.setItem('isEmploy', response.data.is_employ )
+          localStorage.setItem("token", response.data.jwt);
 
           if (user_type===UserTypes.Admin){
             navigate('/admin/')
           } else if (user_type===UserTypes.User){
             navigate(`${is_registered ? '/dashboard' : '/user/base/'}`)
+            setError({title:'Success', color:"success", message:'Logged in succefully' })
+            handleAlertBox()
           }
           
         })
         .catch(error => {
           console.error('Error making POST request:', error);
+          setError(prestat=>({...prestat,title:'Info Alert', message:error.response.data.detail, color:"failure"}))
+          handleAlertBox()
         });
     };
 
@@ -92,6 +102,7 @@ const Login = () => {
     </form>
   </div>
   <Alertbox errorMessage={errorMessage}/>
+  
 </div>
   )
 }

@@ -11,7 +11,9 @@ const ChatWidget = ({messageModal, setmessageModal, chats, setChats, client }) =
   let UserClientId = localStorage.getItem("ClientId")
 
   const sender_id = UserClientId
-  const receiver_id = client.user.client_id
+  const receiver_id = client.client_id
+
+  console.log(client.first_name)
 
     const toggleChat = () => {
         setmessageModal(!messageModal);
@@ -64,7 +66,7 @@ const ChatWidget = ({messageModal, setmessageModal, chats, setChats, client }) =
           {/* Close button */}
           
           <div className="flex justify-between">
-          <h1 className='text-2xl font-extrabold'> {client.user.first_name}</h1>
+          <h1 className='text-2xl font-extrabold'> {client.first_name} {client.last_name}</h1>
             <button onClick={toggleChat} className="text-gray-500 hover:text-gray-700">
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>

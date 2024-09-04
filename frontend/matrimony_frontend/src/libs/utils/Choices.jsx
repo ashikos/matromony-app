@@ -15,3 +15,9 @@ export const TierImgs = {
     102 : gold, 
     103 : diamond,
   }
+
+export const TierChoices = { 
+    FREE :101 ,
+    GOLD :102 ,
+    DIAMOND :103 ,
+}

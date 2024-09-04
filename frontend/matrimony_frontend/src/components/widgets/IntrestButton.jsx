@@ -1,12 +1,28 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; 
+
 import axios from '../../axios';
 import { AcceptChoices } from '../../libs/utils/Choices';
 
 const InterestButton = ({ profile }) => {
   let UserId = parseInt(localStorage.getItem('UserId'), 100);
+  const tierString = localStorage.getItem('tier');
+  const tier = tierString ? parseInt(tierString, 10) : 0;
+
+  const navigate = useNavigate();
   
-  // const [interested, setLiked] = useState(profile.interest);
   const [interestData, setInterestData] = useState(profile.interest);
+
+  const handleClick = (tier)=>{
+
+    console.log(11111, tier);
+    
+    if (tier===101){
+      navigate('/dashboard/plus')
+    }else{
+      toggleLike()
+    }
+  }
 
   const toggleLike = () => {
     
@@ -59,43 +75,17 @@ const InterestButton = ({ profile }) => {
     }
   };
 
-  // const handleUnfollow = () => {
-  //   let interestId = interestData.id;
-  //   let data = { is_approved: null };
-  //   try {
-  //     axios
-  //       .patch(`wedlock/interest/${interestId}/`, data, {
-  //         headers: { 'User-ID': UserId },
-  //       })
-  //       .then((response) => {
-  //         setInterestData(response.data);
-  //         // setLiked(response.data);
-  //       });
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // };
-
 
   return (
     <>
     <button
-      onClick={toggleLike}
+      onClick={()=>handleClick(tier)}
       className={`${interestData?.requested ? 'bg-pink-500' : 'bg-pink-100'} ${profile.requests && profile.requests.is_approved === AcceptChoices.APPROVED ? 'hidden': ''  } border-1 border-pink-600 p-2 font-medium rounded-lg text-xl px-10`}
     >
       <span className={`${interestData?.requested ? 'text-white' : 'text-pink-600'} text-pink-500 font-semibold text-xl`}>
         {interestData?.requested ? 'Interested' : 'Sent Interest'}
       </span>
     </button>
-    
-    {/* <button
-      onClick={handleUnfollow}
-      className={`bg-pink-100 ${profile.interest && profile.interest.is_approved === AcceptChoices.APPROVED ? '': 'hidden'  } border-1 border-pink-600 p-2 font-medium rounded-lg text-xl px-10`}
-    >
-      <span className={`'text-pink-600 text-pink-500 font-semibold text-xl`}>
-        Unfollow
-      </span> 
-    </button> */}
 
     </>
   );

@@ -5,8 +5,8 @@ import UserInfoModal from '../../components/common/modals/UserInfoModal';
 import UserInfo from './UserInfo';
 import IntrestButton from '../../components/widgets/IntrestButton';
 import AcceptDiv from '../../components/widgets/AcceptDiv';
-import gold from '../../assets/plus/diamond.png'
 import { TierImgs } from '../../libs/utils/Choices';
+import pink from '../../assets/bgs/pink.png'
 
 
 const ProfileCard = ({ profile }) => {
@@ -40,12 +40,15 @@ useEffect(() => {
 
 
   return (
-    <div className="flex p-2 border-2 border-pink-300 rounded-3xl">
+    <div className="flex p-2 border-2 border-pink-300 rounded-3xl"
+    style={{ backgroundImage: `url(${pink})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",}}>
       <div>
         <img className='w-[22rem] h-[22rem] object-cover mb-3 rounded-3xl' src={profile.image} alt="" />
       </div>
       <div className="p-5 px-8 w-full">
-        <div className="text-pink-600 font-serif flex justify-between">
+        <div className="text-pink-600  font-serif flex justify-between">
           <div className="flex ">
           <h1 className='text-5xl'>{profile.first_name} {profile.last_name} {profile.id} </h1> {(profile.tier === 101)  ?  '': <img className='w-12 border-none' src={TierImgs[profile.tier]} alt="" />} 
           </div>
@@ -57,7 +60,8 @@ useEffect(() => {
           </UserInfoModal>
 
         </div>
-        <div className="w-full space-y-1 border border-pink-600 p-3 rounded-lg text-pink-600 font-serif mt-8 text-xl font-semibold">
+        <div className="w-full space-y-1 border border-pink-600 p-3 rounded-lg text-pink-600 font-serif mt-8 text-xl font-semibold"
+          >
           <p>Age: {profile.age} </p>
           <p>client id: {profile.client_id} </p>
           <p>Location: Thrissur</p>

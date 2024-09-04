@@ -18,6 +18,7 @@ const UserSidebar = () => {
         const response = await axios.get(
           `accounts/users/${userId}/`);
           localStorage.setItem("ClientId", response.data.client_id)
+          localStorage.setItem("tier", response.data.tier)
           setUserdata(response.data)
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -34,7 +35,7 @@ const UserSidebar = () => {
           backgroundImage: `url(${sidebar_bg})`}}>
           <div className='py-3 px-5 flex-grow'>
             <div className="flex justify-between text-red-500">
-                <h1 className='text-[18px]'>profile</h1>
+                <Link to="/dating" className="text-red-500"><h1 className='text-[18px]'>profile</h1></Link>
                 <Link to="/user" className="text-red-500"> <button className='text-[18px] font-semibold'> edit profile</button></Link>
                 
             </div>

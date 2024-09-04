@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
 import axios from '../../axios'; 
 
 import tick from './../../assets/plus/accept.svg'
 import failed from './../../assets/plus/failed.svg'
+import Alertbox from '../../components/widgets/Alertbox';
 
 
 const Success = () => {
@@ -16,45 +17,44 @@ const Success = () => {
     const tier = queryParams.get('tier');
     const session_id = queryParams.get('session_id');
 
-    const [error, setError] = useState(null);
-
     let payData = success ? paymentDict.success : paymentDict.failed
 
 
-    const CreateTier = async ()=> {
-        let data={
+    const CreateTier = async (tier) => {
+        let data = {
             user: userId,
             tier: tier,
-            is_active: true,
+            is_active: success ? true : false,
             session_id: session_id
-
-        }
-        try{
+        };
+        try {
             const response = await axios.post('payments/transaction/', data);
-            console.log('transaction added succesfully' );
+            console.log('Transaction added successfully');
             console.log(response.data);
-        } catch (error){
-            console.log('Transaction failed server' );
+        } catch (error) {
+            console.log('Transaction failed on the server');
             console.log(error.message);
         }
+    }; 
+    
+    // const handlePremieum = (tier)=>{
+    //     const data = {'tier': tier}
+    //     axios.patch(`accounts/users/${userId}/`, data)
+    //     .then(response => {
+    //      console.log(response.data);
+    //     })
+    //     .catch(error => {
+    //       console.error('Error making POST request:', error);
+    //     }).finally(
+    //     );
+    // }
 
-    }
-    
-    
-    const handlePremieum = (tier)=>{
-        const data = {'tier': tier}
-        axios.patch(`accounts/users/${userId}/`, data)
-        .then(response => {
-         console.log(response.data);
-        })
-        .catch(error => {
-          console.error('Error making POST request:', error);
-        }).finally(
-        );
-    }
- 
-    handlePremieum(success ? tier : 101)
-    CreateTier(success ? tier : 101)
+    useEffect(() => {
+        if (success){
+            CreateTier(success ? tier : 101)
+        }
+    }, [success]);
+
 
 
   return (

@@ -9,7 +9,6 @@ import Users from './pages/Users'
 import LoginLayout from './pages/register/LoginLayout'
 import Login from './pages/register/Login'
 import Register from './pages/register/Register'
-import UserView from './pages/UserView'
 import UserLayout from './pages/UserLayout'
 import General from './pages/UserInfo/General'
 import ContactInfo from './pages/UserInfo/ContactInfo'
@@ -23,7 +22,6 @@ import EmployerInfo from './pages/regInfo/EmployerInfo'
 import Jobseeker from './pages/regInfo/Jobseeker'
 import BaseLayout from './pages/regInfo/BaseLayout'
 import Relationship from './pages/regInfo/Relationship'
-import Matrimony from './pages/Matrimony'
 import MatriInfo from './pages/regInfo/MatriInfo'
 import Preference from './pages/regInfo/Preference'
 import Family from './pages/regInfo/FamilyInfo'
@@ -32,9 +30,12 @@ import UserList from './pages/userdashboard/UserList'
 import Saved from './pages/userdashboard/Saved'
 import Requests from './pages/userdashboard/Requests'
 import Friends from './pages/userdashboard/Friends'
-import Recomandations from './pages/userdashboard/Recomandations'
 import Upgrade from './pages/userdashboard/Upgrade'
 import Success from './pages/userdashboard/Success'
+import Chats from './pages/userdashboard/Chats'
+import Dating from './pages/Dating'
+import DatingLatout from './dating/pages/DatingLatout'
+import Home from './dating/pages/Home'
 
 
 
@@ -92,7 +93,7 @@ function App() {
                   <Route path='saved' element={<Saved/>} />
                   <Route path='friends' element={<Friends/>} />
                   <Route path='requests' element={<Requests/>} />
-                  <Route path='chats' element={<Recomandations/>} />
+                  <Route path='chats' element={<Chats/>} />
                   <Route path='plus' element={<Upgrade/>} />
                   <Route path='payment' element={<Upgrade/>} />    
                 </Route>
@@ -101,6 +102,12 @@ function App() {
                   <Route index element={<UserList/>} />
                   <Route path='' element={<UserList/>} /> 
                 </Route>
+
+                <Route path='/dating' element={<DatingLatout/>}> 
+                  <Route index element={<Home/>} />
+                  <Route path='' element={<Home/>} />
+                </Route>
+
                 
               </Routes>
             </Router>

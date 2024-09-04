@@ -28,7 +28,11 @@ SECRET_KEY = 'django-insecure-d1pi6xj41l4t1z7%49y&c+tk(w18#t$m#up3gquxl9=&s2eye*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['matrimony.ashplus.online',
+                 'www.matrimony.ashplus.online',
+                 '3.6.39.50',
+                 'ec2-3-6-39-50.ap-south-1.compute.amazonaws.com'
+                 ]
 
 
 # Application definition

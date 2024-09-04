@@ -1,5 +1,6 @@
 import axios from '../../axios'
 import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'; 
 import LikeButton from '../../components/widgets/LikeButton'
 import { DistrictChoices, HoroscopeChoices, BodyTypeChoices, 
     DietaryChoices,HeightChoices, SmokeChoices,DrinkingChoices,
@@ -8,29 +9,44 @@ import { DistrictChoices, HoroscopeChoices, BodyTypeChoices,
 import IntrestButton from '../../components/widgets/IntrestButton';
 import { IoIosSend } from "react-icons/io";
 import ChatWidget from '../../components/widgets/ChatWidget';
+import { TierChoices } from '../../libs/utils/Choices';
+import Alertbox from '../../components/widgets/Alertbox';
 
 const UserInfo =  ({client}) => {
 
+    const navigate = useNavigate();
+
     const [messageModal, setmessageModal] = useState(false);
     const [chats, setChats] = useState([])
+    const [errorMessage, setError] = useState({title:"", color:"success", message:null});
     let UserClientId = localStorage.getItem("ClientId")
     let UserId = localStorage.getItem("userId")
-
-
+    const tierString = localStorage.getItem('tier');
+    const tier = tierString ? parseInt(tierString, 10) : 0;
+    
     const manageMessageModal = async ()=>{
 
-        try {
-            const clientId = client.user.client_id;
-            const response = await axios.get(`wedlock/chat/?user=${UserClientId}&friend=${clientId}`, 
-                 {headers: {'User-ID': UserId}}    );
-            setChats(response.data);
-            
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        setmessageModal(!messageModal)
+        if (tier===TierChoices.FREE){
+            navigate('/dashboard/plus')
+          }else{
+            try {
+                const clientId = client.user.client_id;
+                const response = await axios.get(`wedlock/chat/?user=${UserClientId}&friend=${clientId}`, 
+                     {headers: {'User-ID': UserId}}    );
+                setChats(response.data);
+                
+              } catch (error) {
+                console.error('Error fetching data:', error);
+              }
+            setmessageModal(!messageModal)
+          }        
     };
-    
+
+    async function handleAlertBox(){
+        setError({title:"Info", color:"warning", message:'Please upgrade to plus for this feature'})
+        await new Promise(resolve => setTimeout(resolve, 3000)); 
+        setError(prestat=>({...prestat, message:null, title:null}))
+      }
       
 
   return (
@@ -55,7 +71,13 @@ const UserInfo =  ({client}) => {
                 setmessageModal={setmessageModal}
                 chats={chats}
                 setChats={setChats}
-                client={client}/>
+                client={client.user}/>
+            </div>
+            <div className={`${(tier==TierChoices.FREE) ? '': 'hidden' } pt-5`}>
+                <Link to='/dashboard/plus/' className='text-pink-600'>
+                    <p className='text-pink-600 font-semibold text-xl'> Upgrade to Plus to Know more about {client.user.first_name}</p>
+                 </Link>
+                
             </div>
         </div>
         <div className="px-4 pr-32"> 
@@ -84,7 +106,7 @@ const UserInfo =  ({client}) => {
         </div>
 
 
-        <div className="w-full space-y-1  p-3 rounded-lg text-pink-600 font-serif mt-4 text-xl font-semibold">
+        <div className={`${(tier==TierChoices.FREE) ? 'hidden': '' } w-full space-y-1  p-3 rounded-lg text-pink-600 font-serif mt-4 text-xl font-semibold`}>
             <h1 className='text-2xl'> Professional Info </h1>
             <div className="pl-5 flex flex-col gap-1">
                 <p>Designation: {client.professional_info.occupation}</p>
@@ -93,7 +115,7 @@ const UserInfo =  ({client}) => {
             </div>
         </div>
 
-        <div className="w-full space-y-1  p-3 rounded-lg text-pink-600 font-serif mt-4 text-xl font-semibold">
+        <div className={`${(tier==TierChoices.FREE) ? 'hidden': '' } w-full space-y-1  p-3 rounded-lg text-pink-600 font-serif mt-4 text-xl font-semibold`}>
             <h1 className='text-2xl'> Family Info </h1>
             <div className="pl-5 flex flex-col gap-1">
                 <p>Family Ttype: {client.family_info.family_type}</p>
@@ -106,7 +128,7 @@ const UserInfo =  ({client}) => {
         </div>
         
 
-        <div className="w-full space-y-1  p-3 rounded-lg text-pink-600 font-serif mt-4 text-xl font-semibold">
+        <div className={`${(tier==TierChoices.FREE) ? 'hidden': '' } w-full space-y-1  p-3 rounded-lg text-pink-600 font-serif mt-4 text-xl font-semibold`}>
             <h1 className='text-2xl'> Preferences </h1>
             <div className="pl-5 flex flex-col gap-1">
                 <p>Preferred Location: {DistrictChoices[client.preference_info.location]} </p>
@@ -119,9 +141,13 @@ const UserInfo =  ({client}) => {
             </div>
         </div>
 
+        <div className={`${(tier==TierChoices.FREE) ? '': 'hidden' } text-pink-500 font-serif mt-2 text-xl`}>
+            <h1 onClick={handleAlertBox}
+             className='text-xl font-semibold underline cursor-pointer'> View more </h1>
+        </div>
         </div>
 
-
+        <Alertbox errorMessage={errorMessage}/>
         
 
 
